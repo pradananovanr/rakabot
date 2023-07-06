@@ -28,6 +28,7 @@ func Configuration() (*telebot.Bot, error) {
 
 	if err != nil {
 		log.Fatal(err)
+		return nil, err
 	}
 
 	chatbot.Handle("/start", handler.StartHandler())

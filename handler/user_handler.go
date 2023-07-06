@@ -3,7 +3,6 @@ package handler
 import (
 	"fmt"
 	"log"
-	"rakabot/model"
 	"strings"
 
 	"gopkg.in/telebot.v3"
@@ -15,72 +14,6 @@ type Admin struct {
 
 func (adm Admin) Recipient() string {
 	return adm.ChatID
-}
-
-func StartHandler() telebot.HandlerFunc {
-	return func(c telebot.Context) error {
-		log.Printf("sender id %d started bot", c.Sender().ID)
-
-		button := model.Button
-		button.Inline(
-			button.Row(model.BtnSignal),
-			button.Row(model.BtnPropFirm),
-		)
-
-		reply := "Selamat Datang di Bot SerendipityFX\n\nUntuk membeli layanan kami, yang perlu Anda perhatikan :\n1. Silahkan pilih menu langganan di bawah ini\n2. Selanjutnya, pilih durasi langganan\n3. Gunakan metode pembayaran yang Anda inginkan\n4. Kirim bukti transfer/pembayaran Anda sesuai instruksi sebelumnya\n\nSemoga Sukses!!"
-
-		err := c.Send(reply, button)
-
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		return nil
-	}
-}
-
-func SignalHandler() telebot.HandlerFunc {
-	return func(c telebot.Context) error {
-		log.Printf("sender id %d pressed premium signal button", c.Sender().ID)
-
-		button := model.Button
-
-		button.Inline(
-			button.Row(model.BtnResiSignal),
-		)
-
-		reply := "- PREMIUM SERENDIPITY FX SIGNAL SUBSCRIPTION -\n\nApabila Anda berminat untuk berlangganan SerendipityFX Premium Signal silahkan melakukan transfer ke rekening berikut :\n\nNama Bank : BCA\nNomor Rekening : 0391616433\n\nApabila sudah melakukan transfer, silahkan upload bukti transfer dengan menekan tombol di bawah. Admin akan segera memproses permintaan Anda"
-
-		err := c.Send(reply, button)
-
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		return nil
-	}
-}
-
-func PropFirmHandler() telebot.HandlerFunc {
-	return func(c telebot.Context) error {
-		log.Printf("sender id %d pressed prop firm button", c.Sender().ID)
-
-		button := model.Button
-
-		button.Inline(
-			button.Row(model.BtnResiProp),
-		)
-
-		reply := "- JASA PROP FIRM -\n\nApabila Anda berminat terhadap Jasa Prop Firm agar dapat lolos pada kedua Phase silahkan melakukan transfer ke rekening berikut :\n\nNama Bank : BCA\nNomor Rekening : 0391616433\n\nApabila sudah melakukan transfer, silahkan upload bukti transfer dengan menekan tombol di bawah. Admin akan segera memproses permintaan Anda"
-
-		err := c.Send(reply, button)
-
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		return nil
-	}
 }
 
 func ResiSignalHandler() telebot.HandlerFunc {
